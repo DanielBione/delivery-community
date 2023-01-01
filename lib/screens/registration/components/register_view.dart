@@ -33,41 +33,43 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     final fields = generateFields();
     return Container(
-      margin: EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
           horizontal: 20, vertical: getProportionateScreenHeight(150)),
       decoration: BoxDecoration(gradient: AppTheme.defaultGradient()),
       width: SizeConfig.screenWidth,
       height: SizeConfig.screenHeight,
       child: Form(
         key: formKey,
-        child:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          const Text('Register'),
-          ...List.generate(
-            fields.lenght,
-            (index) => CustomTextField(
-              field: fields[index],
-            ),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                Map<String, dynamic> currentRegister = {};
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Text('Register'),
+              ...List.generate(
+                fields.lenght,
+                (index) => CustomTextField(
+                  field: fields[index],
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    Map<String, dynamic> currentRegister = {};
 
-                for (RegisterField item in fields) {
-                  currentRegister[item.label] = item.controller.text;
-                }
-                Register result = Register.fromMap(currentRegister);
+                    for (RegisterField item in fields) {
+                      currentRegister[item.label] = item.controller.text;
+                    }
+                    Register result = Register.fromMap(currentRegister);
 
-                Provider.of<RegisterProvider>(context, listen: false)
-                    .add(result);
+                    Provider.of<RegisterProvider>(context, listen: false)
+                        .add(result);
 
-                Navigator.pushReplacementNamed(context, '/homepage');
-              },
-              child: Text(
-                "Registrar",
-                style: AppTheme.labelText(),
-              ))
-        ]),
+                    Navigator.pushReplacementNamed(context, '/homepage');
+                  },
+                  child: Text(
+                    "Registrar",
+                    style: AppTheme.labelText(),
+                  ))
+            ]),
       ),
     );
   }
