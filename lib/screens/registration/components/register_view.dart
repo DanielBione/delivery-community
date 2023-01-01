@@ -34,7 +34,7 @@ class _RegisterViewState extends State<RegisterView> {
     final fields = generateFields();
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: 20, vertical: getProportionateScreenHeight(150)),
+          horizontal: 40, vertical: getProportionateScreenHeight(225)),
       decoration: BoxDecoration(gradient: AppTheme.defaultGradient()),
       width: SizeConfig.screenWidth,
       height: SizeConfig.screenHeight,
@@ -44,31 +44,38 @@ class _RegisterViewState extends State<RegisterView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text('Register'),
+              Text(
+                'Register',
+                style: AppTheme.labelText(
+                    color: AppTheme.neutralColor, fontWeight: FontWeight.bold),
+              ),
               ...List.generate(
-                fields.lenght,
+                fields.length,
                 (index) => CustomTextField(
                   field: fields[index],
                 ),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    Map<String, dynamic> currentRegister = {};
+              Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                    onPressed: () {
+                      Map<String, dynamic> currentRegister = {};
 
-                    for (RegisterField item in fields) {
-                      currentRegister[item.label] = item.controller.text;
-                    }
-                    Register result = Register.fromMap(currentRegister);
+                      for (RegisterField item in fields) {
+                        currentRegister[item.label] = item.controller.text;
+                      }
+                      Register result = Register.fromMap(currentRegister);
 
-                    Provider.of<RegisterProvider>(context, listen: false)
-                        .add(result);
+                      Provider.of<RegisterProvider>(context, listen: false)
+                          .add(result);
 
-                    Navigator.pushReplacementNamed(context, '/homepage');
-                  },
-                  child: Text(
-                    "Registrar",
-                    style: AppTheme.labelText(),
-                  ))
+                      Navigator.pushReplacementNamed(context, '/homepage');
+                    },
+                    child: Text(
+                      "Registrar",
+                      style: AppTheme.labelText(),
+                    )),
+              )
             ]),
       ),
     );
@@ -84,6 +91,7 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
           fillColor: AppTheme.neutralColor,
+          filled: true,
           label: Text(field.label),
           prefixIcon: Icon(field.icon)),
       autovalidateMode: AutovalidateMode.onUserInteraction,
