@@ -32,7 +32,8 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     final fields = generateFields();
-    return SizedBox(
+    return Container(
+      decoration: BoxDecoration(gradient: AppTheme.defaultGradient()),
       width: SizeConfig.screenWidth,
       height: SizeConfig.screenHeight,
       child: Form(
