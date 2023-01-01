@@ -18,10 +18,16 @@ class RegisterField {
 
   factory RegisterField.fromGenerator(
       String fieldName, int position, TextEditingController controller) {
+    IconData icon = Icons.arrow_forward_ios;
+
+    if (position <= icons.length) {
+      icon = icons[position];
+    }
+
     return RegisterField(
         controller: controller,
         label: fieldName,
-        icon: icons[position],
+        icon: icon,
         validator: (String? value) {
           if (value == null || value == "") return 'Preencha o campo!';
           return null;
@@ -42,12 +48,7 @@ class Register {
   });
 
   static List<String> parameters() {
-    return [
-      'name',
-      'email',
-      'phone',
-      'password',
-    ];
+    return ['name', 'email', 'phone', 'password', 'cpf'];
   }
 }
 
