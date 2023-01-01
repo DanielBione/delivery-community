@@ -48,14 +48,28 @@ class Register {
   });
 
   static List<String> parameters() {
-    return ['name', 'email', 'phone', 'password', 'cpf'];
+    return ['name', 'email', 'phone', 'password'];
+  }
+
+  factory Register.fromMap(Map<String, dynamic> map) {
+    return Register(
+      name: map['name'] != null ? map['name'] as String : null,
+      email: map['email'] != null ? map['email'] as String : null,
+      phone: map['phone'] != null ? map['phone'] as String : null,
+      password: map['password'] != null ? map['password'] as String : null,
+    );
   }
 }
 
 class RegisterProvider extends ChangeNotifier {
-  List<Register> register;
+  List<Register> cadastro;
 
   RegisterProvider({
-    required this.register,
+    required this.cadastro,
   });
+
+  void add(Register register) {
+    cadastro.add(register);
+    notifyListeners();
+  }
 }

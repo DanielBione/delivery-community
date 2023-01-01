@@ -1,7 +1,9 @@
 import 'package:ascend/models/register/register.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../size_config.dart';
+import '../../../theme.dart';
 
 List<IconData> icons = [Icons.person, Icons.mail, Icons.phone, Icons.password];
 
@@ -35,14 +37,32 @@ class _RegisterViewState extends State<RegisterView> {
       height: SizeConfig.screenHeight,
       child: Form(
         key: formKey,
-        child: Column(
-          children: List.generate(
+        child: Column(children: [
+          ...List.generate(
             fields.lenght,
             (index) => CustomTextField(
               field: fields[index],
             ),
           ),
-        ),
+          ElevatedButton(
+              onPressed: () {
+                Map<String, dynamic> currentRegister = {};
+
+                for (RegisterField item in fields) {
+                  currentRegister[item.label] = item.controller.text;
+                }
+                Register result = Register.fromMap(currentRegister);
+
+                Provider.of<RegisterProvider>(context, listen: false)
+                    .add(result);
+
+                Navigator.pushReplacementNamed(context, '/homepage');
+              },
+              child: Text(
+                "Registrar",
+                style: AppTheme.labelText(),
+              ))
+        ]),
       ),
     );
   }

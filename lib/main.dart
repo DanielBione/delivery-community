@@ -6,6 +6,6 @@ import 'models/register/register.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => RegisterProvider(register: [])),
+    ChangeNotifierProvider(create: (context) => RegisterProvider(cadastro: [])),
   ], child: const App()));
 }
