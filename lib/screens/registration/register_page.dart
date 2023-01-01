@@ -9,9 +9,8 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Scaffold(
-      appBar: AppBar(title: const Text('Register-Page')),
-      body: const RegisterView(),
+    return const Scaffold(
+      body: RegisterView(),
     );
   }
 }

@@ -33,12 +33,16 @@ class _RegisterViewState extends State<RegisterView> {
   Widget build(BuildContext context) {
     final fields = generateFields();
     return Container(
+      margin: EdgeInsets.symmetric(
+          horizontal: 20, vertical: getProportionateScreenHeight(150)),
       decoration: BoxDecoration(gradient: AppTheme.defaultGradient()),
       width: SizeConfig.screenWidth,
       height: SizeConfig.screenHeight,
       child: Form(
         key: formKey,
-        child: Column(children: [
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          const Text('Register'),
           ...List.generate(
             fields.lenght,
             (index) => CustomTextField(
@@ -77,7 +81,9 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       decoration: InputDecoration(
-          label: Text(field.label), prefixIcon: Icon(field.icon)),
+          fillColor: AppTheme.neutralColor,
+          label: Text(field.label),
+          prefixIcon: Icon(field.icon)),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: field.controller,
       validator: field.validator,
